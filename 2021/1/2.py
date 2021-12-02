@@ -1,4 +1,4 @@
-with open('1/input.txt', 'r') as f:
+with open('2021/1/input.txt', 'r') as f:
     noOfIncreased = 0
     lines = []
     for line in f:
