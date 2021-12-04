@@ -1,51 +1,41 @@
-with open('2021/3/input.txt', 'r') as f:
-    oxygen = []
-    co2 = []
-    noOfZero = [0] * 12
-    noOfOne = [0] * 12
-    for line in f:
-        oxygen.append(line.strip())
-        co2.append(line.strip())
-        i = 0
-        for num in line.strip():
-            if num == "0":
-                noOfZero[i] += 1
-            else:
-                noOfOne[i] += 1
-            i += 1
-    oxygenRating = 0
-    co2Rating = 0
-    oxygenSearch = []
-    co2Search = []
-    for j in range(0, 10):
-        if noOfOne[j] >= noOfZero[j]:
-            oxygenSearch.append("1")
-            co2Search.append("0")
-        else:
-            oxygenSearch.append("0")
-            co2Search.append("1")
-    k = 0
-    for num in oxygenSearch:
-        temp = []
-        for line in oxygen:
-            if line[k] == num:
-                temp.append(line)
-        oxygen = temp
-        k += 1
-    l = 0
-    for num in co2Search:
-        temp = []
-        for line in co2:
-            if line[l] == num:
-                temp.append(line)
-        co2 = temp
-        l += 1
+def check(rating):
+    with open('2021/3/input.txt', 'r') as f:
+        data = f.read().splitlines()
+        for i in range(12):
+            noOfZero = 0
+            noOfOne = 0
+            if len(data) != 1:
+                temp = []
+                for num in data:
+                    if num[i] == "0":
+                        noOfZero += 1
+                    else:
+                        noOfOne += 1
+                if rating == "oxygen":
+                    if noOfOne >= noOfZero:
+                        for num in data:
+                            if num[i] == "1":
+                                temp.append(num)
+                        data = temp
+                    else:
+                        for num in data:
+                            if num[i] == "0":
+                                temp.append(num)
+                        data = temp
+                elif rating == "co2":
+                    if noOfZero <= noOfOne:
+                        for num in data:
+                            if num[i] == "0":
+                                temp.append(num)
+                        data = temp
+                    else:
+                        for num in data:
+                            if num[i] == "1":
+                                temp.append(num)
+                        data = temp
+    return data
 
-    print(oxygen)
-    print(co2)
-    print(int(oxygen[0], 2) * int(oxygen[0], 2))
-        
+oxygen = check("oxygen")
+co2 = check("co2")
 
-
-    
-print()
+print(int(oxygen[0], 2) * int(co2[0], 2))
