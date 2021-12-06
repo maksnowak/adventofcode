@@ -1,32 +1,26 @@
-data = open('2021/5/testinput.txt', 'r').read().split('\n')
+data = open('2021/5/input.txt', 'r').read().strip().split('\n')
 for i, line in enumerate(data):
-    data[i] = line.split(' -> ')
-data.pop()
-diagram_row = [0] * len(data)
-diagram = [diagram_row] * len(data)
-print(data)
-print(diagram)
+    data[i] = line.replace(' -> ', ',').split(',')
+max_x = max([max(int(x[0]), int(x[2])) for x in data])
+max_y = max([max(int(x[1]), int(x[3])) for x in data])
+diagram = [[0 for _ in range(max_x + 1)] for _ in range(max_y + 1)]
 for row in data:
-    a = row[0].split(',')
-    b = row[1].split(',')
-    if a[0] == b[0]:
-        c = int(a[1])
-        d = int(b[1])
-        if c > d:
-            temp = c
-            c = d
-            d = temp
-        for j in range(c, d + 1):
-            diagram[j][int(a[0])] += 1
-    elif a[1] == b[1]:
-        c = int(a[0])
-        d = int(b[0])
-        if c > d:
-            temp = c
-            c = d
-            d = temp
-        for j in range(c, d + 1):
-            diagram[int(a[1])][j] += 1
+    a, b, c, d = int(row[0]), int(row[1]), int(row[2]), int(row[3])
+    if a == c:
+        if b > d:
+            b, d = d, b
+        for j in range(b, d + 1):
+            diagram[j][a] += 1
+    elif b == d:
+        if a > c:
+            a, c = c, a
+        for j in range(a, c + 1):
+            diagram[b][j] += 1
     else:
         pass
-print(diagram)
+_sum = 0
+for row in diagram:
+    for point in row:
+        if point >= 2:
+            _sum += 1
+print(_sum)
