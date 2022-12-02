@@ -7,7 +7,6 @@ def firstPuzzle(file):
             all_calories += int(food)
         sums.append(all_calories)
     return max(sums)
-    data.close()
 
 
 def secondPuzzle(file):
@@ -22,10 +21,9 @@ def secondPuzzle(file):
     top_three = sums[-3:]
     sum_of_three = sum(top_three)
     return sum_of_three
-    data.close()
 
-print(firstPuzzle('example.txt'))
-print(firstPuzzle('input.txt'))
+print(firstPuzzle('2022/1/example.txt'))
+print(firstPuzzle('2022/1/input.txt'))
 
-print(secondPuzzle('example.txt'))
-print(secondPuzzle('input.txt'))
+print(secondPuzzle('2022/1/example.txt'))
+print(secondPuzzle('2022/1/input.txt'))
