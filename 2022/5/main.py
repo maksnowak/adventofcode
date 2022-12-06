@@ -1,4 +1,3 @@
-#TODO make the program work with a standard input, not a modified one (see README.md)
 def firstPuzzle(file):
     data = open(file).read().split('\n\n')
     crates = data[0]
