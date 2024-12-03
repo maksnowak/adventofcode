@@ -1,4 +1,3 @@
-use core::slice;
 use std::fs;
 use std::env;
 use regex::Regex;
